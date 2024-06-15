@@ -8,4 +8,11 @@ import { BannerComponent } from './banner/banner.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {}
+export class HomeComponent {
+  result!: string;
+
+  receberResult(value: string) {
+    this.result = value;
+    alert(this.result);
+  }
+}
