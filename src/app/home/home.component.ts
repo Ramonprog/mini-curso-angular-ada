@@ -1,15 +1,28 @@
-import { Component } from '@angular/core';
-import { BannerComponent } from './banner/banner.component';
+import { Component, OnInit } from '@angular/core';
+import { ListaService } from './lista.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [BannerComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  listOfItems: any = [];
   result!: string;
+
+  constructor(private listaService: ListaService) {}
+
+  ngOnInit() {
+    this.getListFromService();
+  }
+
+  getListFromService() {
+    this.listaService.getList().subscribe((data) => {
+      console.log(data);
+      this.listOfItems = data;
+    });
+  }
 
   receberResult(value: string) {
     this.result = value;
